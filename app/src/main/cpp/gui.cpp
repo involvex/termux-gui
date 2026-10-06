@@ -15,7 +15,7 @@
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_termux_gui_ConnectionHandler_00024Companion_create_1ashmem(JNIEnv *env, jobject thiz, jint size) {
+Java_com_invapp_gui_ConnectionHandler_00024Companion_create_1ashmem(JNIEnv *env, jobject thiz, jint size) {
     __android_log_print( ANDROID_LOG_DEBUG,"create_ashmem", "creating ashmem\n");
     int fd = open("/dev/ashmem", O_RDWR);
     if (fd == -1) {
@@ -34,7 +34,7 @@ Java_com_termux_gui_ConnectionHandler_00024Companion_create_1ashmem(JNIEnv *env,
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_termux_gui_ConnectionHandler_00024Companion_destroy_1ashmem(JNIEnv *env, jobject thiz, jint fd) {
+Java_com_invapp_gui_ConnectionHandler_00024Companion_destroy_1ashmem(JNIEnv *env, jobject thiz, jint fd) {
     __android_log_print( ANDROID_LOG_DEBUG,"destroy_ashmem", "closing ashmem fd\n");
     close(fd);
 }
@@ -42,7 +42,7 @@ Java_com_termux_gui_ConnectionHandler_00024Companion_destroy_1ashmem(JNIEnv *env
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_com_termux_gui_ConnectionHandler_00024Companion_map_1ashmem(JNIEnv *env, jobject thiz, jint fd, jint size) {
+Java_com_invapp_gui_ConnectionHandler_00024Companion_map_1ashmem(JNIEnv *env, jobject thiz, jint fd, jint size) {
     __android_log_print( ANDROID_LOG_DEBUG,"map_ashmem", "mapping ashmem\n");
     void* mem = mmap(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
     if (mem == MAP_FAILED) {
@@ -55,7 +55,7 @@ Java_com_termux_gui_ConnectionHandler_00024Companion_map_1ashmem(JNIEnv *env, jo
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_termux_gui_ConnectionHandler_00024Companion_unmap_1ashmem(JNIEnv *env, jobject thiz, jobject buff) {
+Java_com_invapp_gui_ConnectionHandler_00024Companion_unmap_1ashmem(JNIEnv *env, jobject thiz, jobject buff) {
     __android_log_print( ANDROID_LOG_DEBUG,"unmap_ashmem", "unmapping ashmem\n");
     void* adr = env->GetDirectBufferAddress(buff);
     jlong cap = env->GetDirectBufferCapacity(buff);
@@ -72,7 +72,7 @@ static std::atomic<PFNEGLDESTROYIMAGEKHRPROC> destroyImage{nullptr};
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_termux_gui_views_HardwareBufferSurfaceView_00024EGLImageKHR_00024Companion_nativeEglDestroyImageKHR(
+Java_com_invapp_gui_views_HardwareBufferSurfaceView_00024EGLImageKHR_00024Companion_nativeEglDestroyImageKHR(
         JNIEnv *env, jobject thiz, jlong disp, jlong img) {
     if (destroyImage.load() == nullptr) {
         destroyImage = (PFNEGLDESTROYIMAGEKHRPROC) eglGetProcAddress("eglDestroyImageKHR");
@@ -94,7 +94,7 @@ static std::atomic<PFNGLEGLIMAGETARGETTEXTURE2DOESPROC> eglImageTargetTexture2D{
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_termux_gui_views_HardwareBufferSurfaceView_00024EGLImageKHR_00024Companion_nativeEGLImageTargetTexture2DOES(
+Java_com_invapp_gui_views_HardwareBufferSurfaceView_00024EGLImageKHR_00024Companion_nativeEGLImageTargetTexture2DOES(
         JNIEnv *env, jobject thiz, jlong img) {
     if (eglImageTargetTexture2D.load() == nullptr) {
         eglImageTargetTexture2D = (PFNGLEGLIMAGETARGETTEXTURE2DOESPROC) eglGetProcAddress("glEGLImageTargetTexture2DOES");
