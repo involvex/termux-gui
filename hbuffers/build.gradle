@@ -50,7 +50,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.termux.hbuffers'
+    namespace 'com.invapp.hbuffers'
 }
 
 dependencies {

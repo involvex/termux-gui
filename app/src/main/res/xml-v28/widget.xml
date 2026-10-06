@@ -8,6 +8,6 @@
     android:previewImage="@mipmap/ic_launcher"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
-    android:configure="com.termux.gui.GUIWidgetConfigurationActivity"
+    android:configure="com.invapp.gui.GUIWidgetConfigurationActivity"
     android:widgetFeatures="reconfigurable">
 </appwidget-provider>

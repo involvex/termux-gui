@@ -28,4 +28,4 @@
 -printseeds seeds.txt
 -printmapping mapping.txt
 
--keep class com.termux.gui.hbuffers.** { *; }
+-keep class com.invapp.gui.hbuffers.** { *; }

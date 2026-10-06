@@ -12,7 +12,7 @@ syntax = "proto3";
 
 // Feel free to change these values to fit the structure of your own implementation.
 package tgui.proto0;
-option java_package = "com.termux.gui.protocol.protobuf.v0";
+option java_package = "com.invapp.gui.protocol.protobuf.v0";
 
 
 /*
@@ -23,9 +23,9 @@ For establishing the connection, see https://github.com/termux/termux-gui/blob/m
 The program has to open 2 AF_UNIX SO_STREAM server sockets in the abstract linux namespace and listen to new connections.
 One of these Sockets is used as the main communication socket with the plugin, the other one is used to send asynchronous event data to the program, eg. click events.
 
-The program then has to send a broadcast to com.termux.gui/.GUIReceiver with the string extra mainSocket and the string extra eventSocket, the values of which specify the socket name used for that communication type. The names have to be transferred without the leading null byte required to specify the abstract linux namespace.
+The program then has to send a broadcast to com.involvex.termux_app.gui/.GUIReceiver with the string extra mainSocket and the string extra eventSocket, the values of which specify the socket name used for that communication type. The names have to be transferred without the leading null byte required to specify the abstract linux namespace.
 Delivering the broadcast can be easily done with the am command:
-am broadcast --user 0 -n com.termux.gui/.GUIReceiver --es mainSocket mainSocketName --es eventSocket eventSocketName
+am broadcast --user 0 -n com.involvex.termux_app.gui/.GUIReceiver --es mainSocket mainSocketName --es eventSocket eventSocketName
 
 For additional security, the program should check if the connected peer has the same user id as the program itself, to ensure only the plugin can accept the connection.
 

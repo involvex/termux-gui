@@ -78,7 +78,7 @@ if (System.getenv("GITHUB_ACTIONS") == null) {
 android {
     compileSdk 34
     defaultConfig {
-        applicationId "com.termux.gui"
+        applicationId "com.involvex.termux_app.gui"
         minSdk 24
         targetSdk 34
         versionCode 8
@@ -134,7 +134,7 @@ android {
         }
     }
     ndkVersion '23.1.7779620'
-    namespace 'com.termux.gui'
+    namespace 'com.invapp.gui'
 }
 
 dependencies {

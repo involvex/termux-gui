@@ -11,9 +11,9 @@ For the binary protocol no methods will be queued, since they all return a value
 The program has to open 2 AF_UNIX SO_STREAM server sockets in the abstract linux namespace and listen to new connections.  
 One of these Sockets is used as the main communication socket with the plugin, the other one is used to send asynchronous event data to the program, eg. click events.  
   
-The Program then has to send a broadcast to com.termux.gui/.GUIReceiver with the string extra mainSocket and the string extra eventSocket, the values of which specify the socket name used for that communication type. The names have to be transferred without the leading null byte required to specify the abstract linux namespace.  
+The Program then has to send a broadcast to com.involvex.termux_app.gui/.GUIReceiver with the string extra mainSocket and the string extra eventSocket, the values of which specify the socket name used for that communication type. The names have to be transferred without the leading null byte required to specify the abstract linux namespace.  
 Delivering the broadcast can be easily done with the `am` command:  
-`am broadcast --user 0 -n com.termux.gui/.GUIReceiver --es mainSocket mainSocketName --es eventSocket eventSocketName`  
+`am broadcast --user 0 -n com.involvex.termux_app.gui/.GUIReceiver --es mainSocket mainSocketName --es eventSocket eventSocketName`  
   
 For additional security, the program may check if the connected peer has the same user id as the program itself, to ensure only the plugin can accept the connection.
 

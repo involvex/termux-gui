@@ -20,7 +20,7 @@ static std::atomic<PFNEGLGETNATIVECLIENTBUFFERANDROIDPROC> getClientBuffer{nullp
 
 extern "C"
 JNIEXPORT jlong JNICALL
-Java_com_termux_gui_hbuffers_HBuffers_00024Companion_nativeHardwareBufferToEGLImageKHR(JNIEnv *env,
+Java_com_invapp_gui_hbuffers_HBuffers_00024Companion_nativeHardwareBufferToEGLImageKHR(JNIEnv *env,
                                                                                        jobject thiz,
                                                                                        jlong dispJ,
                                                                                        jobject bJ) {
@@ -60,7 +60,7 @@ Java_com_termux_gui_hbuffers_HBuffers_00024Companion_nativeHardwareBufferToEGLIm
 }
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_termux_gui_hbuffers_HBuffers_00024Companion_sendHardwareBuffer(JNIEnv *env, jobject thiz,
+Java_com_invapp_gui_hbuffers_HBuffers_00024Companion_sendHardwareBuffer(JNIEnv *env, jobject thiz,
                                                                         jint fd, jobject bJ) {
     AHardwareBuffer* b = AHardwareBuffer_fromHardwareBuffer(env, bJ);
     // Ignore sigpipe as a precaution, AHardwareBuffer_sendHandleToUnixSocket doesn't use the NO_SIGNAL flag for sendmsg

@@ -1,7 +1,17 @@
-# Termux:GUI
+# InVx:GUI
+
+> InVxTermux fork of [termux/termux-gui](https://github.com/termux/termux-gui).
+> Package `com.involvex.termux_app.gui`, `sharedUserId` `com.involvex.termux_app`.
+> Install only alongside same-source InVxTermux APKs (matching test-key signature;
+> `dev_keystore.jks` fingerprint `B6:DA:…:E1` is identical to the main app test key).
+> Client libraries (e.g. `termuxgui` Python bindings) hardcode the upstream
+> component `com.termux.gui/.GUIReceiver` — patch the broadcast target to
+> `com.involvex.termux_app.gui/.GUIReceiver` (and `totermux()` to
+> `com.involvex.termux_app/.app.TermuxActivity`), see `Protocol.md`.
+> Toolchain intentionally kept at upstream (AGP 8.8.1, compileSdk 34): the plugin
+> is self-contained and shares no UID-gated libraries with the main app.
 
 [<img src="https://img.shields.io/github/v/release/termux/termux-gui?include_prereleases"/>](https://github.com/termux/termux-gui/releases)
-[<img src="https://img.shields.io/f-droid/v/com.termux.gui"/>](https://f-droid.org/de/packages/com.termux.gui/)
 
 
 This is a plugin for [Termux](https://github.com/termux/termux-app) that enables command line programs to use the native android GUI.  
