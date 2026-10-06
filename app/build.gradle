@@ -39,6 +39,12 @@ class UpdateProtoAction implements Action {
     void execute(Object o) {
         File protoFile = Paths.get(projectDir, "src", "main", "proto", "GUIProt0.proto").toFile()
         File keyEventFile = Paths.get(sdkDirectory, "sources", "android-"+ compileSdk, "android", "view", "KeyEvent.java").toFile()
+        // Best-effort: SDK sources are not installed everywhere (e.g. fresh checkouts,
+        // CI). The checked-in proto is then used as-is, same as CI builds.
+        if (! keyEventFile.isFile()) {
+            println("KeyCode enum check skipped, SDK sources not installed: " + keyEventFile)
+            return
+        }
         String[] lines = keyEventFile.readLines()
         String codes = lines.findAll {
             it.stripLeading().startsWith("public static final int KEYCODE_")
@@ -67,7 +73,13 @@ if (System.getenv("GITHUB_ACTIONS") == null) {
     }
 
     tasks.register("ensure-sources", Exec.class) {
-        it.commandLine(Paths.get(android.sdkDirectory.path, "cmdline-tools", "latest", "bin", "sdkmanager").toString(), "sources;android-" + android.compileSdk.toString())
+        // Best-effort: only run when sdkmanager exists and never fail the build
+        // (Windows uses sdkmanager.bat; fresh checkouts may lack cmdline-tools).
+        String sdm = Paths.get(android.sdkDirectory.path, "cmdline-tools", "latest", "bin", "sdkmanager").toString()
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) sdm += ".bat"
+        it.commandLine(sdm, "sources;android-" + android.compileSdk.toString())
+        it.onlyIf { new File(sdm).isFile() }
+        it.ignoreExitValue = true
     }
 
     tasks.preBuild {
